@@ -22,7 +22,8 @@ syn match     rscComment      /^#.*/
 
 "syn region      rscContext      start=+/+ end=+\n+ contains=rscTopContext
 " options submenus: /interface ether1 etc
-syn match     rscSubMenu      "^/[a-zA-Z- ]*"
+syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z-]*"
+syn match     rscSubMenu      "\([a-z]\)\@<!/ [a-zA-Z-]*"
 
 
 "syn keyword   rscContext      certificate driver file interface ip ipv6 log mpls port queue
@@ -30,11 +31,14 @@ syn match     rscSubMenu      "^/[a-zA-Z- ]*"
 
 " variables are matched by looking at strings ending with "=", e.g. var=
 syn match     rscVariable     "[a-zA-Z0-9-/]*\(=\)\@="
+syn match     rscVariable     "$[a-zA-Z0-9-]*"
 
 " colored for clarity
-syn match     rscDelimiter    "[,=-]"
+syn match     rscDelimiter    "[,=]"
 " match slash in CIDR notation (1.2.3.4/24)
 syn match     rscDelimiter    "\(\d\)\@<=\/\(\d\)\@="
+" dash in IP ranges
+syn match     rscDelimiter    "\(\d\)\@<=-\(\d\)\@="
 
 " match service names after "set", like in original routeros syntax
 syn match     rscService      "\(set\)\@<=\s\(api-ssl\|api\|dns\|ftp\|http\|https\|pim\|ntp\|smb\|ssh\|telnet\|winbox\|www\|www-ssl\)"
@@ -42,13 +46,26 @@ syn match     rscService      "\(set\)\@<=\s\(api-ssl\|api\|dns\|ftp\|http\|http
 " colors various interfaces
 syn match     rscInterface    "bridge\d\|ether\d\|wlan\d\|pppoe-\(out\|in\)\d"
 
-"-----------
-syn keyword   rscAction       accept add beep delay do drop execute export find get import
-syn keyword   rscAction       log parse pick ping print put quit redirect redo resolve set undo
-
 syn keyword   rscBoolean      yes no
 
 syn keyword   rscConditional  if
+
+" operators
+syn match     rscOperator     " [\+\-\*\<\>\=\!\~\^\&\.\,] "
+syn match     rscOperator     "[\<\>\!]="
+syn match     rscOperator     "\(<<\|>>\)"
+syn match     rscOperator     "[\+\-]\(\d\)\@="
+
+" commands
+syn keyword   rscCommands     beep delay put len typeof pick log time set find environment
+syn keyword   rscCommands     terminal error parse resolve toarray tobool toid toip toip6
+syn keyword   rscCommands     tonum tostr totime add remove enable disable set get print
+syn keyword   rscCommands     export edit find append as-value brief detail count-only file
+syn keyword   rscCommands     follow follow-only from interval terse value-list without-paging
+
+"-----------
+syn keyword   rscAction       accept add beep delay do drop execute export find get import
+syn keyword   rscAction       log parse pick ping print put quit redirect redo resolve set get undo
 
 syn keyword   rscFunction     len setup typeof
 syn keyword   rscFunction     toarray tobool toid toip toip6 tonum tostr totime
@@ -56,7 +73,7 @@ syn keyword   rscFunction     toarray tobool toid toip toip6 tonum tostr totime
 syn keyword   rscKeyword      detail error file info led nothing password time
 
 syn keyword   rscRepeat       for foreach while
-syn match     rscSpecial      "[!$():\[\]{|}]"
+syn match     rscSpecial      "[():\[\]{|}]"
 
 syn region    rscString       start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=rscSpecial
 
@@ -238,15 +255,17 @@ syn keyword   rscConnState    new related established invalid
 "      keywords TODO FIXME and XXX
 "
 
-hi link rscSubMenu              Label
+hi link rscSubMenu              Function
 hi link rscDelimiter            Operator
 hi link rscInterface            Type
 hi link rscVariable             Identifier
 hi link rscBoolean              Boolean
+hi link rscOperator             Operator
+hi link rscCommands             Operator
 
-hi link rscAction               Function
-hi link rscConditional          Function
-hi link rscRepeat               Function
+hi link rscAction               Statement
+hi link rscConditional          Conditional
+hi link rscRepeat               Repeat
 hi link rscComment              Comment
 hi link rscConnState            Type
 hi link rscContext              Type
@@ -255,7 +274,6 @@ hi link rscFunction             Function
 hi link rscKeyword              Identifier
 hi link rscLabel                Label
 hi link rscNumber               Number
-hi link rscOperator             Statement
 hi link rscProtocol             Type
 hi link rscService              Type
 hi link rscSpecialChar          SpecialChar
