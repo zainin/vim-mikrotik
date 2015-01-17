@@ -17,12 +17,12 @@ endif
 syn case ignore
 
 " set iskeyword=@,-,_,.
-set iskeyword=A-Z,a-z,48-57,-
+set iskeyword=A-Z,a-z,48-57,-,/
 
 syn match       rscComment      /^#.*/
 
 "syn region      rscContext      start=+/+ end=+\n+ contains=rscTopContext
-syn keyword     rscContext      certificate driver file interface ip ipv6 log mpls port queue bridge
+syn keyword     rscContext      certificate driver file interface ip ipv6 log mpls port queue
 syn keyword     rscContext      radius routing snmp special-login store system tool user
 
 syn keyword     rscAction       accept add beep delay do drop execute export find get import
@@ -97,7 +97,7 @@ syn keyword     rscKeyword      resource retransmit-interval route router-id rou
 syn keyword     rscKeyword      sa-dst-address sa-src-address scope screen script secret send-initial-contact
 syn keyword     rscKeyword      set-system-time settings sfq-allot sfq-perturb shared-users shares
 syn keyword     rscKeyword      show-at-login show-dummy-rule signup-allowed sip-direct-media skin sms
-syn keyword     rscKeyword      sniffer snooper socks source speed split-user-domain ssid ssid-all
+syn keyword     rscKeyword      sniffer snooper socks source speed split-user-domain ssid ssid-all supported-rates-a\/g
 syn keyword     rscKeyword      state-after-reboot status-autorefresh stop-bits store-every store-leases-disk
 syn keyword     rscKeyword      supplicant-identity system target target-scope term test-id threshold timeout
 syn keyword     rscKeyword      timeout-timer to-addresses tool topics tracking traffic-flow traffic-generator
@@ -169,8 +169,8 @@ syn keyword     rscInterface    sstp-client sstp-server traffic-eng vlan vpls vr
 syn keyword     rscConnState    new related established invalid
 
 syn keyword rscKeyword
-\ country band antenna-gain hw-protection-mode wireless-protocol
-\ adaptive-noise-immunity default-name supported-rates-a\/g
+\ country frequency band antenna-gain hw-protection-mode wireless-protocol
+\ adaptive-noise-immunity default-name
 
 " -------------------------------------------------// highlight mappings //---
 
