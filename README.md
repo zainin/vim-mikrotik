@@ -1,4 +1,4 @@
-vim-mikrotik
+Vim RouterOS Syntax
 ============
 
 Vim syntax highlighting pligin for Mikrotik scripts.
