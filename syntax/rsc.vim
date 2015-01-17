@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:             ND's Router OS Scripting Syntax
-" Maintainer:           ndBjorne
+" Maintainer:           zainin, forked from ndBjorne
 " Last Change:          $Date: 2012/12/15 15:35:23 $
 " Revision:             $Revision: 0.901 $
 " URL:                  .
@@ -21,8 +21,8 @@ set iskeyword=A-Z,a-z,48-57,-
 
 syn match       rscComment      /^#.*/
 
-syn region      rscContext      start=+/+ end=+\n+ contains=rscTopContext
-syn keyword     rscContext      certificate driver file interface ip ipv6 log mpls port queue
+"syn region      rscContext      start=+/+ end=+\n+ contains=rscTopContext
+syn keyword     rscContext      certificate driver file interface ip ipv6 log mpls port queue bridge
 syn keyword     rscContext      radius routing snmp special-login store system tool user
 
 syn keyword     rscAction       accept add beep delay do drop execute export find get import
@@ -56,7 +56,7 @@ syn keyword     rscKeyword      bandwidth-server baud-rate bfd bidirectional-tim
 syn keyword     rscKeyword      bootp-support bridge-mode broadcast broadcast-addresses cable-settings
 syn keyword     rscKeyword      cache-administrator cache-entries cache-hit-dscp cache-max-ttl cache-on-disk
 syn keyword     rscKeyword      cache-size chain channel channel-time check-interval cipher client
-syn keyword     rscKeyword      client-to-client-reflection comment community config connection
+syn keyword     rscKeyword      client-to-client-reflection comment community config connection addresses
 syn keyword     rscKeyword      connection-bytes connection-idle-timeout connection-state console contact
 syn keyword     rscKeyword      contrast cpu customer data-bits default default-ap-tx-limit default-client-tx-limit
 syn keyword     rscKeyword      default-forwarding default-group default-profile default-route-distance
@@ -115,7 +115,7 @@ syn keyword     rscKeyword      authentication authentication-password authentic
 syn keyword     rscKeyword      bsd-syslog syslog-facility syslog-severity
 syn keyword     rscKeyword      clock time-zone time-zone-name
 syn keyword     rscKeyword      connection-mark new-connection-mark new-packet-mark new-routing-mark routing-mark
-syn keyword     rscKeyword      dst-address dst-address-list dst-delta dst-end dst-port dst-start
+syn keyword     rscKeyword      dst-address dst-address-list dst-delta dst-end dst-port dst-start address-list-timeout
 syn keyword     rscKeyword      max-client-connections max-connections max-server-connections serialize-connections
 syn keyword     rscKeyword      metric-ospf metric-other-ospf redistribute-ospf redistribute-other-ospf
 syn keyword     rscKeyword      metric-rip redistribute-rip ripng
@@ -136,7 +136,7 @@ syn keyword     rscKeyword      static-algo-0 static-algo-1 static-algo-2 static
 syn keyword     rscKeyword      static-key-0 static-key-1 static-key-2 static-key-3 static-sta-private-key static-transmit-key
 syn keyword     rscKeyword      streaming-enabled streaming-max-rate streaming-server
 syn keyword     rscKeyword      switch-to-spt switch-to-spt-bytes switch-to-spt-interval
-syn keyword     rscKeyword      trap-generators trap-target trap-version
+syn keyword     rscKeyword      trap-generators trap-target trap-version trap-community
 
 syn keyword     rscKeyword      update-stats-interval update-timer
 syn keyword     rscKeyword      use-compression use-encryption use-explicit-null use-ipv6 use-mpls
@@ -159,7 +159,7 @@ syn keyword     rscKeyword      filter-ip-address filter-ip-protocol use-ip-fire
 syn keyword     rscKeyword      wds-cost-range wds-default-bridge wds-default-cost wds-ignore-ssid wds-mode
 
 syn keyword     rscProtocol     bgp ip ipsec ipv6 ldp ospf ospf-v3 ppp rip snmp  tcp udp
-syn keyword     rscService      api dns ftp http https pim ntp smb ssh telnet winbox www www-ssl
+syn keyword     rscService      api api-ssl dns ftp http https pim ntp smb ssh telnet winbox www www-ssl
 
 syn keyword     rscInterface    6to4 bonding bridge eoip eoipv6 ethernet gre gre6 ipip ipipv6 isdn-client
 syn keyword     rscInterface    isdn-server l2tp-client l2tp-server lte mesh ovpn-client ovpn-server
@@ -170,7 +170,7 @@ syn keyword     rscConnState    new related established invalid
 
 syn keyword rscKeyword
 \ country band antenna-gain hw-protection-mode wireless-protocol
-\ adaptive-noise-immunity default-name
+\ adaptive-noise-immunity default-name supported-rates-a\/g
 
 " -------------------------------------------------// highlight mappings //---
 
