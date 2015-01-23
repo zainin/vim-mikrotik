@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:    RouterOS scripts
 " Maintainer:  zainin
-" Last Change: 2015-01-17
+" Last Change: 2015-01-23
 
 syntax clear
 if exists("b:current_syntax")
@@ -15,15 +15,13 @@ endif
 syn case ignore
 
 " set iskeyword=@,-,_,.
-set iskeyword=A-Z,a-z,:
+set iskeyword=A-Z,a-z
 
 " comments
 syn match     rscComment      /^#.*/
 
 " options submenus: /interface ether1 etc
 syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z-]*"
-syn match     rscSubMenu      "\([a-z]\)\@<!/ [a-zA-Z-]*"
-
 
 " variables are matched by looking at strings ending with "=", e.g. var=
 syn match     rscVariable     "[a-zA-Z0-9-/]*\(=\)\@="
@@ -53,32 +51,30 @@ syn match     rscOperator     "\(<<\|>>\)"
 syn match     rscOperator     "[\+\-]\(\d\)\@="
 
 " commands
+syn match     rscCommands     "print"
 syn keyword   rscCommands     beep delay put len typeof pick log time set find environment
 syn keyword   rscCommands     terminal error parse resolve toarray tobool toid toip toip6
 syn keyword   rscCommands     tonum tostr totime add remove enable disable set get print
 syn keyword   rscCommands     export edit find append as-value brief detail count-only file
 syn keyword   rscCommands     follow follow-only from interval terse value-list without-paging
+syn keyword   rscCommands     where
 
 " variable types
-syn keyword   rscType         global local :global :local
+syn keyword   rscType         global local
 
 " loop keywords
 syn keyword   rscRepeat       do while for foreach
 
 syn match     rscSpecial      "[():\[\]{|}]"
 
+syn region    rscString       start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=rscSpecial
+
 
 "-----------
 
-syn keyword   rscKeyword      detail error file info led nothing password time
-
-
-"syn region    rscString       start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=rscSpecial
-
-
-syn keyword   rscProtocol     bgp ip ipsec ipv6 ldp ospf ospf-v3 ppp rip snmp  tcp udp
-
-syn keyword   rscConnState    new related established invalid
+  "syn keyword   rscConnState    new related established invalid
+  "syn keyword   rscProtocol     bgp ip ipsec ipv6 ldp ospf ospf-v3 ppp rip snmp  tcp udp
+  "syn keyword   rscKeyword      detail error file info led nothing password time
 
 
   "
@@ -143,11 +139,11 @@ hi link rscCommands             Operator
 hi link rscType                 Type
 hi link rscRepeat               Repeat
 hi link rscSpecial              Delimiter
-hi link rscConnState            Type
-
-hi link rscKeyword              Identifier
-hi link rscProtocol             Type
+"hi link rscConnState            Underlined
 hi link rscString               String
+
+"hi link rscKeyword              Identifier
+"hi link rscProtocol             Type
 
 " source <sfile>:p:h/rsc.vim
 
