@@ -51,7 +51,6 @@ syn match     rscOperator     "\(<<\|>>\)"
 syn match     rscOperator     "[\+\-]\(\d\)\@="
 
 " commands
-syn match     rscCommands     "print"
 syn keyword   rscCommands     beep delay put len typeof pick log time set find environment
 syn keyword   rscCommands     terminal error parse resolve toarray tobool toid toip toip6
 syn keyword   rscCommands     tonum tostr totime add remove enable disable set get print
