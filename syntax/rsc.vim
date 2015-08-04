@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:    RouterOS scripts
-" Maintainer:  manheraz
+" Maintainer:  zainin
 " Last Change: 2015-08-04
 
 syntax clear
