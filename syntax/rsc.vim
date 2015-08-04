@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:    RouterOS scripts
-" Maintainer:  zainin
-" Last Change: 2015-01-23
+" Maintainer:  manheraz
+" Last Change: 2015-08-04
 
 syntax clear
 if exists("b:current_syntax")
@@ -38,7 +38,7 @@ syn match     rscDelimiter    "\(\d\)\@<=-\(\d\)\@="
 syn match     rscService      "\(set\)\@<=\s\(api-ssl\|api\|dns\|ftp\|http\|https\|pim\|ntp\|smb\|ssh\|telnet\|winbox\|www\|www-ssl\)"
 
 " colors various interfaces
-syn match     rscInterface    "bridge\d\|ether\d\|wlan\d\|pppoe-\(out\|in\)\d"
+syn match     rscInterface    "bridge\d\+\|ether\d\+\|wlan\d\+\|pppoe-\(out\|in\)\d\+"
 
 syn keyword   rscBoolean      yes no
 
