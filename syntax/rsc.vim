@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:    RouterOS scripts
 " Maintainer:  zainin
-" Last Change: 2015-08-04
+" Last Change: 2017-07-13
 
 syntax clear
 if exists("b:current_syntax")
@@ -18,7 +18,7 @@ syn case ignore
 set iskeyword=A-Z,a-z
 
 " comments
-syn match     rscComment      /^#.*/
+syn match     rscComment      /^\s*#.*/
 
 " options submenus: /interface ether1 etc
 syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z-]*"
