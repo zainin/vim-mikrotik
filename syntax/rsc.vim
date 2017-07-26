@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:    RouterOS scripts
 " Maintainer:  zainin
-" Last Change: 2017-07-13
+" Last Change: 2017-07-26
 
 syntax clear
 if exists("b:current_syntax")
@@ -21,7 +21,7 @@ set iskeyword=A-Z,a-z
 syn match     rscComment      /^\s*#.*/
 
 " options submenus: /interface ether1 etc
-syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z-]*"
+syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z0-9-]*"
 
 " variables are matched by looking at strings ending with "=", e.g. var=
 syn match     rscVariable     "[a-zA-Z0-9-/]*\(=\)\@="
@@ -29,10 +29,10 @@ syn match     rscVariable     "$[a-zA-Z0-9-]*"
 
 " colored for clarity
 syn match     rscDelimiter    "[,=]"
-" match slash in CIDR notation (1.2.3.4/24)
-syn match     rscDelimiter    "\(\d\)\@<=\/\(\d\)\@="
+" match slash in CIDR notation (1.2.3.4/24, 2001:db8::/48, ::1/128)
+syn match     rscDelimiter    "\(\x\|:\)\@<=\/\(\d\)\@="
 " dash in IP ranges
-syn match     rscDelimiter    "\(\d\)\@<=-\(\d\)\@="
+syn match     rscDelimiter    "\(\x\|:\)\@<=-\(\x\|:\)\@="
 
 " match service names after "set", like in original routeros syntax
 syn match     rscService      "\(set\)\@<=\s\(api-ssl\|api\|dns\|ftp\|http\|https\|pim\|ntp\|smb\|ssh\|telnet\|winbox\|www\|www-ssl\)"
