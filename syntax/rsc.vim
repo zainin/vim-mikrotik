@@ -21,7 +21,7 @@ set iskeyword=A-Z,a-z
 syn match     rscComment      /^\s*#.*/
 
 " options submenus: /interface ether1 etc
-syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z-]*"
+syn match     rscSubMenu      "\([a-z]\)\@<!/[a-zA-Z0-9-]*"
 
 " variables are matched by looking at strings ending with "=", e.g. var=
 syn match     rscVariable     "[a-zA-Z0-9-/]*\(=\)\@="
